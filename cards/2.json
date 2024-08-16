@@ -1,0 +1,47 @@
+[
+  {
+    "Hello. How are you? Hello. I'm fine, thank you": "Hej. Hur mår du? Hej. Jag mår bra, tack"
+  },
+  {
+    "Do you speak Swedish?": "Talar du svenska?"
+  },
+  {
+    "No, I don't speak Swedish, only a little bit": "Nej, jag pratar inte svenska, bara lite grann"
+  },
+  {
+    "Which country are you from?": "Vilket land kommer du ifrån?"
+  },
+  {
+    "What is your nationality?": "Vilken nationalitet har du?"
+  },
+  {
+    "Do you live here?": "Bor du här?"
+  },
+  {
+    "My name is Sarah; what's your name?":"Mitt namn är Sarah; Vad heter du?"
+  },
+  {
+    "What are you doing here? I am on holiday": "Vad gör du här? Jag är på semester"
+  },
+  {
+    "We are on holiday": "Vi är på semester"
+  },
+  {
+    "I am on a business trip": "Jag är på en affärsresa"
+  },
+  {
+    "I work here": "Jag jobbar här"
+  },
+  {
+    "We work here": "Vi jobbar här"
+  },
+  {
+    "Where are the good places to go out and eat?": "Var finns de bra ställena att gå ut och äta?"
+  },
+  {
+    "Is there a museum in the neighborhood?": "Finns det ett museum i närheten?"
+  },
+  {
+    "Where could I get an internet connection?": "Var kan jag få en internetanslutning?"
+  }
+]
