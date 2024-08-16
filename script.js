@@ -1,66 +1,57 @@
-const boxx = document.getElementsByClassName("create-box")[0];
-const flashcards = document.getElementsByClassName("flashcards")[0];
-const question = document.getElementById("question");
-const answer = document.getElementById("answer");
-let cardArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
-cardArray.forEach(divMaker);
+document.addEventListener("DOMContentLoaded", function() {
+    let lines = [];
 
-function divMaker (text) {
-    var newDiv = document.createElement("div");
-    var h2_q = document.createElement("h2");
-    var h2_a = document.createElement("h2");
+    fetch('file.txt')
+        .then(response => response.text())
+        .then(data => {
+            lines = data.split('\n').filter(line => line.trim() !== '');
+            displayRandomLine();
+        })
+        .catch(error => console.error('Error reading file:', error));
 
-    newDiv.className = 'flashcard';
+    function displayRandomLine() {
+        const fileContentDiv = document.getElementById('fileContent');
+        fileContentDiv.innerHTML = ''; 
 
-    h2_q.setAttribute('style', "border-top: 1px solid red ; padding: 15px; margin-top: 30px");
+        if (lines.length > 0) {
+            const randomIndex = Math.floor(Math.random() * lines.length);
+            const selectedLine = lines[randomIndex];
 
-    h2_q.innerHTML = text.myQuestion;
+            const card = document.createElement('div');
 
-    h2_a.setAttribute('style', "display: none; color: red; text-align: center;border-top: 1px solid red ; padding: 15px; margin-top: 30px");
-    h2_a.innerHTML = text.myAnswer;
+            const text = document.createElement('h1')
+            text.textContent = selectedLine;
+            card.appendChild(text)
+            card.classList.add("card");
 
-    newDiv.appendChild(h2_q);
-    newDiv.appendChild(h2_a);
+            const next = document.createElement('button');
+            next.textContent = 'Next';
+            next.id = 'next';   
 
-    newDiv.addEventListener('click', function () {
-        if (h2_a.style.display == "none"){
-            h2_a.style.display = "block"
-            h2_q.style.display = "none";
+            // Add event listener to display a new random line on button click
+            next.addEventListener('click', displayRandomLine);
+
+            const check = document.createElement('button');
+            check.textContent = "Check";
+            check.id = 'check';
+            
+            check.addEventListener('click', flip)
+
+            fileContentDiv.appendChild(card);
+            card.appendChild(document.createElement('br'));
+            card.appendChild(check);
+            card.appendChild(next);
+            card.appendChild(document.createElement('br'));
+            card.appendChild(document.createElement('br'));
+        } else {
+            const noMoreLines = document.createElement('p');
+            noMoreLines.textContent = "No more lines available.";
+            fileContentDiv.appendChild(noMoreLines);
         }
-        else{
-            h2_a.style.display = "none"
-            h2_q.style.display = "block";
-        }
-    })
-
-    flashcards.appendChild(newDiv);
-}
-
-function addCard() {
-    var FlashObject = {
-        'myQuestion' : question.value,
-        'myAnswer' : answer.value
     }
 
-    cardArray.push(FlashObject);
-    localStorage.setItem('items', JSON.stringify(cardArray));
+    function flip(){
 
-    divMaker(cardArray[cardArray.length - 1]);
-    question.value = '';
-    answer.value = '';
-}
-
-function delCard() {
-    localStorage.clear();
-    cardArray = [];
-    flashcards.innerHTML = '';
-}
-
-function hideBox() {
-    boxx.style.display = 'none';
-}
-
-function newShown() {
-    boxx.style.display = 'block'
-}
+    }
+});

@@ -1,0 +1,62 @@
+[
+  {
+    "file1": "Hello. How are you? Hello. I'm fine, thank you",
+    "file2": "Hej. Hur mår du? Hej. Jag mår bra, tack"
+  },
+  {
+    "file1": "Do you speak Swedish?",
+    "file2": "Talar du svenska?"
+  },
+  {
+    "file1": "No, I don't speak Swedish, only a little bit",
+    "file2": "Nej, jag pratar inte svenska, bara lite grann"
+  },
+  {
+    "file1": "Which country are you from?",
+    "file2": "Vilket land kommer du ifrån?"
+  },
+  {
+    "file1": "What is your nationality?",
+    "file2": "Vilken nationalitet har du?"
+  },
+  {
+    "file1": "Do you live here?",
+    "file2": "Bor du här?"
+  },
+  {
+    "file1": "My name is Sarah; what's your name?",
+    "file2": "Mitt namn är Sarah; Vad heter du?"
+  },
+  {
+    "file1": "What are you doing here? I am on holiday",
+    "file2": "Vad gör du här? Jag är på semester"
+  },
+  {
+    "file1": "We are on holiday",
+    "file2": "Vi är på semester"
+  },
+  {
+    "file1": "I am on a business trip",
+    "file2": "Jag är på en affärsresa"
+  },
+  {
+    "file1": "I work here",
+    "file2": "Jag jobbar här"
+  },
+  {
+    "file1": "We work here",
+    "file2": "Vi jobbar här"
+  },
+  {
+    "file1": "Where are the good places to go out and eat?",
+    "file2": "Var finns de bra ställena att gå ut och äta?"
+  },
+  {
+    "file1": "Is there a museum in the neighborhood?",
+    "file2": "Finns det ett museum i närheten?"
+  },
+  {
+    "file1": "Where could I get an internet connection?",
+    "file2": "Var kan jag få en internetanslutning?"
+  }
+]
