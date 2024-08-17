@@ -2,10 +2,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     let lines = [];
 
-    fetch('file.txt')
+    function fetchAndDisplayKeys(fileName) {
+        fetch(fileName)
         .then(response => response.text())
         .then(data => {
-            lines = data.split('\n').filter(line => line.trim() !== '');
+            //lines = data.split('\n').filter(line => line.trim() !== '');
+            lines = Object.entries(data);
             displayRandomLine();
         })
         .catch(error => console.error('Error reading file:', error));
@@ -54,4 +56,24 @@ document.addEventListener("DOMContentLoaded", function() {
     function flip(){
 
     }
+    }
+
+    // Add event listeners to buttons
+    document.getElementById('menu-1').addEventListener('click', () => {
+        fetchAndDisplayKeys('cards/1.json');
+    });
+
+    document.getElementById('menu-2').addEventListener('click', () => {
+        fetchAndDisplayKeys('cards/2.json');
+    });
+    
+    document.getElementById('menu-3').addEventListener('click', () => {
+        fetchAndDisplayKeys('cards/3.json');
+    });
+    
+    document.getElementById('menu-4').addEventListener('click', () => {
+        fetchAndDisplayKeys('cards/4.json');
+    });
+    
+    
 });
