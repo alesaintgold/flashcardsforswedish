@@ -3,13 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let lines = {};
 
     function fetchAndDisplayKeys(fileName) {
-        console.log("fetching file " + fileName)
         fetch(fileName)
         .then(response => response.text())
         .then(data => {
             lines = JSON.parse(data);
-            console.log(lines)
-            console.log(lines[0])
             displayRandomLine();
         })
         .catch(error => console.error('Error reading file:', error));
@@ -24,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 const selectedLine = JSON.stringify(
                     lines[Math.floor(Math.random() * lines.length)])
                     .replace(/[{}",]/g, '').split(":");
-                console.log(selectedLine)
 
                 strEn = selectedLine[0];
                 strSw = selectedLine[1];
