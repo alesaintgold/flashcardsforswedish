@@ -1,61 +1,65 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    let lines = [];
+    let lines = {};
 
     function fetchAndDisplayKeys(fileName) {
+        console.log("fetching file " + fileName)
         fetch(fileName)
         .then(response => response.text())
         .then(data => {
-            //lines = data.split('\n').filter(line => line.trim() !== '');
-            lines = Object.entries(data);
+            lines = JSON.parse(data);
+            console.log(lines)
+            console.log(lines[0])
             displayRandomLine();
         })
         .catch(error => console.error('Error reading file:', error));
 
-    function displayRandomLine() {
-        const fileContentDiv = document.getElementById('fileContent');
-        fileContentDiv.innerHTML = ''; 
+        function displayRandomLine() {
+            const fileContentDiv = document.getElementById('fileContent');
+            fileContentDiv.innerHTML = ''; 
 
-        if (lines.length > 0) {
-            const randomIndex = Math.floor(Math.random() * lines.length);
-            const selectedLine = lines[randomIndex];
+            if (lines.length > 0) {
+                const card = document.createElement('div');
+                const text = document.createElement('h1');
+                const selectedLine = JSON.stringify(
+                    lines[Math.floor(Math.random() * lines.length)])
+                    .replace(/[{}",]/g, '').split(":");
+                console.log(selectedLine)
 
-            const card = document.createElement('div');
+                strEn = selectedLine[0];
+                strSw = selectedLine[1];
 
-            const text = document.createElement('h1')
-            text.textContent = selectedLine;
-            card.appendChild(text)
-            card.classList.add("card");
+                text.textContent = strEn; 
+                card.appendChild(text)
+                card.classList.add("card");
 
-            const next = document.createElement('button');
-            next.textContent = 'Next';
-            next.id = 'next';   
+                const next = document.createElement('button');
+                next.textContent = 'Next';
+                next.id = 'next';   
 
-            // Add event listener to display a new random line on button click
-            next.addEventListener('click', displayRandomLine);
+                // Add event listener to display a new random line on button click
+                next.addEventListener('click', displayRandomLine);
 
-            const check = document.createElement('button');
-            check.textContent = "Check";
-            check.id = 'check';
-            
-            check.addEventListener('click', flip)
+                const check = document.createElement('button');
+                check.textContent = "Check";
+                check.id = 'check';
+                
+                check.addEventListener('click', ()=>{
+                    text.textContent = strSw
+                });
 
-            fileContentDiv.appendChild(card);
-            card.appendChild(document.createElement('br'));
-            card.appendChild(check);
-            card.appendChild(next);
-            card.appendChild(document.createElement('br'));
-            card.appendChild(document.createElement('br'));
-        } else {
-            const noMoreLines = document.createElement('p');
-            noMoreLines.textContent = "No more lines available.";
-            fileContentDiv.appendChild(noMoreLines);
+                fileContentDiv.appendChild(card);
+                card.appendChild(document.createElement('br'));
+                card.appendChild(check);
+                card.appendChild(next);
+                card.appendChild(document.createElement('br'));
+                card.appendChild(document.createElement('br'));
+            } else {
+                const noMoreLines = document.createElement('p');
+                noMoreLines.textContent = "No more cards available.";
+                fileContentDiv.appendChild(noMoreLines);
+            }
         }
-    }
-
-    function flip(){
-
-    }
     }
 
     // Add event listeners to buttons

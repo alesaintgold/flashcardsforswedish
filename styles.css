@@ -5,7 +5,8 @@ h1{
 
 body {
   background-image: url("flag.jpg");
-  background-size: cover;             
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .card {
