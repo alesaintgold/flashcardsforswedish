@@ -2,7 +2,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     let lines = {};
 
-    function fetchAndDisplayKeys(fileName) {
+    function fetchAndDisplayKeys(module) {
+        const fileName = "cards/" + module + ".json";
         fetch(fileName)
         .then(response => response.text())
         .then(data => {
@@ -18,8 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
             if (lines.length > 0) {
                 const card = document.createElement('div');
                 const text = document.createElement('h1');
+                
+                
+                const randIndex = Math.floor(Math.random() * lines.length);
                 const selectedLine = JSON.stringify(
-                    lines[Math.floor(Math.random() * lines.length)])
+                    lines[randIndex])
                     .replace(/[{}",]/g, '').split(":");
 
                 strEn = selectedLine[0];
@@ -39,14 +43,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 const check = document.createElement('button');
                 check.textContent = "Check";
                 check.id = 'check';
-                
+
                 check.addEventListener('click', ()=>{
                     text.textContent = strSw
+                })
+
+                const play = document.createElement('button');
+                play.textContent = "Play";
+                play.id = 'check';
+                
+                play.addEventListener('click', ()=>{
+                    (new Audio("cards/audio/" + module + "/" + randIndex + ".mp3")).play();
                 });
 
                 fileContentDiv.appendChild(card);
                 card.appendChild(document.createElement('br'));
                 card.appendChild(check);
+                card.appendChild(play);
                 card.appendChild(next);
                 card.appendChild(document.createElement('br'));
                 card.appendChild(document.createElement('br'));
@@ -60,19 +73,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to buttons
     document.getElementById('menu-1').addEventListener('click', () => {
-        fetchAndDisplayKeys('cards/1.json');
+        fetchAndDisplayKeys('1');
     });
 
     document.getElementById('menu-2').addEventListener('click', () => {
-        fetchAndDisplayKeys('cards/2.json');
+        fetchAndDisplayKeys('2');
     });
     
     document.getElementById('menu-3').addEventListener('click', () => {
-        fetchAndDisplayKeys('cards/3.json');
+        fetchAndDisplayKeys('3');
     });
     
     document.getElementById('menu-4').addEventListener('click', () => {
-        fetchAndDisplayKeys('cards/4.json');
+        fetchAndDisplayKeys('4');
     });
     
     
