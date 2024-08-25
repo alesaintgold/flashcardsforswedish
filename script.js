@@ -42,16 +42,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 const check = document.createElement('button');
                 check.textContent = "Check";
-                check.id = 'check';
-
-                check.addEventListener('click', ()=>{
-                    text.textContent = strSw
-                })
 
                 const play = document.createElement('button');
                 play.textContent = "Play";
-                play.id = 'check';
-                
+                play.style.visibility = 'hidden';
+
+                check.addEventListener('click', ()=>{
+                    text.textContent = strSw
+                    play.style.visibility = 'visible';
+                })
+
                 play.addEventListener('click', ()=>{
                     (new Audio("cards/audio/" + module + "/" + randIndex + ".mp3")).play();
                 });

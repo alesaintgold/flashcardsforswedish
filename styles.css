@@ -39,9 +39,6 @@ body {
 #next{
   float:right;
 }
-#check{
-  float:left;
-}
 
 #sidebar {
   background: rgba(245, 245, 245, 0.698);
