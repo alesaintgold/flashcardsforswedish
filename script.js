@@ -68,3 +68,28 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('menu-3').addEventListener('click', () => {fetchAndDisplayKeys('3');});
     document.getElementById('menu-4').addEventListener('click', () => {fetchAndDisplayKeys('4');});
 });
+
+function addButton(parent, textContent, cssClass = '', isVisible = true, action) {
+    // Create a new button element
+    const button = document.createElement('button');
+    
+    // Set the button text content
+    button.textContent = textContent;
+    
+    // If a CSS class is provided, add it to the button
+    if (cssClass) {
+        button.className = cssClass;
+    }
+
+    // Set the initial visibility of the button
+    button.style.display = isVisible ? 'inline-block' : 'none';
+    
+    // Add the action (event listener) to the button
+    button.addEventListener('click', action);
+    
+    // Append the button to the parent element
+    parent.appendChild(button);
+    
+    // Return the reference to the created button
+    return button;
+}
