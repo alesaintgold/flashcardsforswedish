@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const numberOfModules = 4;
+    for (let index = 1; index <= numberOfModules; index++) {
+        document.getElementById("menu-"+index).addEventListener('click', () => {fetchAndDisplayKeys(""+index);});    
+    }
+    
     let lines = {};
 
     function fetchAndDisplayKeys(module) {
@@ -15,58 +20,61 @@ document.addEventListener("DOMContentLoaded", function() {
             const fileContentDiv = document.getElementById('fileContent');
             fileContentDiv.innerHTML = ''; 
 
-            if (lines.length > 0) {
-                const card = document.createElement('div');
-                const text = document.createElement('h1');
-                
-                const randIndex = Math.floor(Math.random() * lines.length);
-                const selectedLine = JSON.stringify(
-                    lines[randIndex]).replace(/[{}",]/g, '').split(":");
-                strEn = selectedLine[0];
-                strSw = selectedLine[1];
+            if(lines.length <= 0)
+                return;
 
-                text.textContent = strEn; 
-                card.appendChild(text)
-                card.classList.add("card");
+            const card = document.createElement('div');
+            const text = document.createElement('h1');
+            
+            const randIndex = Math.floor(Math.random() * lines.length);
 
-                const next = document.createElement('button');
-                next.textContent = 'Next';
-                next.id = 'next';   
+            const selectedLine = JSON.stringify(lines[randIndex]).replace(/[{}",]/g, '').split(":");
+            strEn = selectedLine[0];
+            strSw = selectedLine[1];
 
-                next.addEventListener('click', displayRandomLine);
+            text.textContent = strEn; 
 
-                const check = document.createElement('button');
-                check.textContent = "Check";
+            card.appendChild(text)
+            card.classList.add("card");
+            card.appendChild(document.createElement('br'));
 
-                const play = document.createElement('button');
-                play.textContent = "Play";
-                play.style.visibility = 'hidden';
+            fileContentDiv.appendChild(card);
+            
+            let firsTimePressed = true;
 
-                check.addEventListener('click', ()=>{
-                    text.textContent = strSw
-                    play.style.visibility = 'visible';})
+            //declaring buttons 
+            const next = addButton(card, 'Next', 'next', displayRandomLine);
+            
+            const audio = new Audio("cards/audio/" + module + "/" + randIndex + ".mp3");
+            
+            let back = null;
+            
+            const check = addButton(card, 'Check', null, ()=>{
+                text.textContent = strSw
+                if(firsTimePressed)
+                    audio.play();
+                firsTimePressed = false;
+                play.style.display = 'inline-block';
+                check.style.display = 'none';
+                back.style.display = 'inline-block'});
 
-                play.addEventListener('click', ()=>{
-                    (new Audio("cards/audio/" + module + "/" + randIndex + ".mp3")).play();});
+            back = addButton(card, 'Back ',null, ()=>{
+                text.textContent = strEn;
+                check.style.display = 'inline-block';
+                back.style.display = 'none';},false);
 
-                fileContentDiv.appendChild(card);
-                card.appendChild(document.createElement('br'));
-                card.appendChild(check);
-                card.appendChild(play);
-                card.appendChild(next);
-            } else {
-                const noMoreLines = document.createElement('p');
-                noMoreLines.textContent = "No more cards available.";
-                fileContentDiv.appendChild(noMoreLines);
-            }
+            const play = addButton(card, 'Play', null, ()=>{audio.play();},false);
+        }
+        function addButton(parent, textContent, cssClass = '', action, isVisible = true) {
+            const button = document.createElement('button');
+            button.textContent = textContent;
+            button.classList.add(cssClass);
+            button.style.display = isVisible ? 'inline-block' : 'none';
+            button.addEventListener('click', action);
+            if(parent)  parent.appendChild(button);
+            return button;
         }
     }
-
-    // Add event listeners to buttons
-    document.getElementById('menu-1').addEventListener('click', () => {fetchAndDisplayKeys('1');});
-    document.getElementById('menu-2').addEventListener('click', () => {fetchAndDisplayKeys('2');});
-    document.getElementById('menu-3').addEventListener('click', () => {fetchAndDisplayKeys('3');});
-    document.getElementById('menu-4').addEventListener('click', () => {fetchAndDisplayKeys('4');});
 });
 
 function addButton(parent, textContent, cssClass = '', isVisible = true, action) {
